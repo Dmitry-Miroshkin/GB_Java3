@@ -1,6 +1,6 @@
 package HomeWork.Lesson1;
 
-public class Element <T> {
+public class Element<T> {
     private T elem;
 
     public Element() {
