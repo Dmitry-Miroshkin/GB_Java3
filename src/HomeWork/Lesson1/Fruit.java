@@ -4,7 +4,7 @@ public  abstract class Fruit {
     String name;
     Float weight;
 
-    public Fruit(String name, Float weight) {
+    public Fruit() {
         this.name = name;
         this.weight = weight;
     }

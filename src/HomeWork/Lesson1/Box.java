@@ -8,13 +8,16 @@ public class Box<Fruit> {
 
     public void addFruit(Fruit f) {
         if (!list.isEmpty()) {
-            if (this.list.getClass().getName().equals(f.getClass().getName())) {
-                System.out.println("В ящик добавлен "+ (f.getClass().getName()));
+            if (this.list.get(0).getClass().getName().equals(f.getClass().getName())) {
+                System.out.println("В ящик добавлен " + (f.getClass().getName()));
                 list.add(f);
+            } else {
+                System.out.println("В зтот ящик добавить нельзя");
             }
-            else {System.out.println("В зтот ящик добавить нельзя");
-            }
-        } else list.add(f);
+        } else {
+            list.add(f);
+            System.out.println("В ящик добавлен " + (f.getClass().getName()));
+        }
 
     }
 
@@ -22,15 +25,18 @@ public class Box<Fruit> {
         this.list.clear();
     }
 
-    public void removeFruit(Fruit f) {
-        if (!list.isEmpty() && list.contains(f)) list.remove(f);
+    public void removeFruit() {
+        int last = this.list.size() - 1;
+        if (!this.list.isEmpty()) this.list.remove(last);
         else System.out.println("В ящике этого нет!");
     }
 
     public Float getWeight() {
         Float boxWeight = 0f;
-
-        return boxWeight * this.list.size();
+        if (this.list.isEmpty()) return boxWeight;
+        if (this.list.get(0) instanceof Apple) {
+            return boxWeight + this.list.size();
+        } else return boxWeight + this.list.size() * 1.5f;
     }
 
     public boolean isEmpty() {
