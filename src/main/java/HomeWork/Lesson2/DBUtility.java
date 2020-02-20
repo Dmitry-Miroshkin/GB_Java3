@@ -15,10 +15,19 @@ public class DBUtility {
      * Метод должен вернуть список производителей которые
      *  делают и пк и ноутбуки
      */
-    public ArrayList<String> selectMaker(Statement stmt) {
+    public static ArrayList<String> selectMaker(Statement stmt) {
         ArrayList<String> ans = new ArrayList<>();
+        try {
+            ResultSet rs = stmt.executeQuery("select maker, count(maker) as counter from \n" +
+                    "(select DISTINCT * from product) group by maker having counter >= 2;");
+            while (rs.next()) {
+                ans.add(rs.getString("maker"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        // TODO: 18.02.2020
+
         return ans;
     }
 
@@ -31,9 +40,18 @@ public class DBUtility {
      * или сделать любым другим способом
      */
 
-    public int makerWithMaxProceeds(Statement stmt) {
+    public static int makerWithMaxProceeds(Statement stmt) throws SQLException {
         int result = 0;
-        //todo
+        try{
+        ResultSet rs = stmt.executeQuery("SELECT MAX(SUM) as ANS from\n" +
+                " (SELECT DISTINCT maker, sum(price) as SUM from\n"+
+                " (select distinct id, maker, price from PC join Product on\n"+
+                " pc.model = product.model) group by maker);");
+        rs.next();
+        result = rs.getInt("ANS");}
+        catch (SQLException e){
+            e.printStackTrace();
+        }
         return result;
 
     }
