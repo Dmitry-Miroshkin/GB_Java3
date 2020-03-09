@@ -22,30 +22,19 @@ public class MainClass {
     }
 
     static boolean isOneFour(int[] arr) {
-        boolean result = false;
+        boolean result;
         boolean isone = false;
         boolean isfour = false;
         for (int value : arr) {
             if (value == 1) {
                 isone = true;
-            }
+            } else
             if (value == 4) {
                 isfour = true;
-            }
+            } else  {isfour = false;
+            break;}
         }
         result = isfour && isone;
         return result;
-    }
-
-
-    public static void main(String[] args) {
-        int[] array = new int[]{
-                0, 1, 65, 3, 2, 5, 67, 23, 78, 4, 4, -2
-        };
-        System.out.println(Arrays.toString(afterFour(array)));
-
-//        int[] array1 = new int[]{1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        int[] array1 = new int[]{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4,};
-        System.out.println(isOneFour(array1));
     }
 }
